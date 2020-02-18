@@ -86,30 +86,10 @@ const Navbar = () => {
           <div className="navbar-item">
             <div className="field is-grouped">
               <p className="control">
-                <a
-                  className="bd-tw-button button"
-                  data-social-network="Twitter"
-                  data-social-action="tweet"
-                  data-social-target="https://bulma.io"
-                  target="_blank"
-                  href="https://twitter.com/intent/tweet?text=Bulma: a modern CSS framework based on Flexbox&amp;hashtags=bulmaio&amp;url=https://bulma.io&amp;via=jgthms"
-                >
-                  <span className="icon">
-                    <i className="fab fa-twitter"></i>
-                  </span>
-                  <span>Tweet</span>
-                </a>
+                <CoolButton isInfo>Login</CoolButton>
               </p>
               <p className="control">
-                <a
-                  className="button is-primary"
-                  href="https://github.com/jgthms/bulma/releases/download/0.8.0/bulma-0.8.0.zip"
-                >
-                  <span className="icon">
-                    <i className="fas fa-download"></i>
-                  </span>
-                  <span>Download</span>
-                </a>
+                <CoolButton isPrimary>Signup</CoolButton>
               </p>
             </div>
           </div>
@@ -119,15 +99,77 @@ const Navbar = () => {
   );
 };
 
-const FormField = (???) => {
+const FormField = props => {
   return (
-    <div class="field">
-      <label class="label">???</label>
-      <div class="control">
-        <input class="input" type=??? placeholder=??? />
+    <div className="field">
+      <label className="label">{props.label}</label>
+      <div className="control">
+        <input
+          className="input"
+          type={props.type}
+          placeholder={props.placeholder}
+        />
       </div>
     </div>
   );
+};
+
+const bulmaClasses = {
+  isActive: "is-active",
+  isBlack: "is-black",
+  isCentered: "is-centered",
+  isDanger: "is-danger",
+  isDark: "is-dark",
+  isFocused: "is-focused",
+  isGrouped: "is-grouped",
+  isHovered: "is-hovered",
+  isInfo: "is-info",
+  isInverted: "is-inverted",
+  isLarge: "is-large",
+  isLight: "is-light",
+  isLink: "is-link",
+  isLoading: "is-loading",
+  isMedium: "is-medium",
+  isOutlined: "is-outlined",
+  isPrimary: "is-primary",
+  isRight: "is-right",
+  isRounded: "is-rounded",
+  isSelected: "is-selected",
+  isSmall: "is-small",
+  isStatic: "is-static",
+  isSuccess: "is-success",
+  isText: "is-text",
+  isWarning: "is-warning",
+  isWhite: "is-white"
+};
+
+const CoolButton = props => {
+  let classes = "button";
+
+  if (props.className) {
+    classes += " " + props.className;
+  }
+
+  for (const attr in bulmaClasses) {
+    if (props[attr]) {
+      classes += " " + bulmaClasses[attr];
+    }
+  }
+
+  // if (props.isSmall) {
+  //   classes += " " + "is-small";
+  // }
+  // if (props.isDanger) {
+  //   classes += " " + "is-danger";
+  // }
+  // if (props.isSuccess) {
+  //   classes += " " + "is-success";
+  // }
+  // if (props.isPrimary) {
+  //   classes += " " + "is-primary";
+  // }
+
+  return <button className={classes}>{props.children}</button>;
 };
 
 const App = () => {
@@ -140,6 +182,12 @@ const App = () => {
         type="email"
         placeholder="e.g. alexsmith@gmail.com"
       />
+      <CoolButton isSmall isDanger className="is-rounded my-class">
+        ButtonBAR
+      </CoolButton>
+      <CoolButton isSmall isSuccess>
+        ButtonFOO
+      </CoolButton>
     </div>
   );
 };
